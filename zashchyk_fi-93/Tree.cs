@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Lab123
+namespace NewLab
 {
     class Tree
     {
         private TreeNode Root;
-
         private Dictionary<int, List<Segment>> Dict;
-
         public int Depth { get; set; }
 
         public Tree(TreeNode root)
@@ -26,43 +22,50 @@ namespace Lab123
             Dict = new Dictionary<int, List<Segment>>();
             Depth = 0;
         }
-        
-        
-        public void InOrderTraversal()
-        {
-            if (Root != null)
-            {
-                for (int i = 0; i < Depth; i++)
-                {
-                    Dict.Add(i, new List<Segment>());
-                }
-                Root.InOrderTraversal(null, Dict, 0);
-            }
-            else
-                Console.WriteLine("Empty");
-        }
-        
+
         public void Insert(Segment data)
         {
             if (Root != null)
             {
-                Depth = Root.Insert(data, Depth, Dict);                
+                Root = Root.Insert(data);                
             }
-            else 
+            else
                 Root = new TreeNode(data);
+            Height();
         }
 
-        public void prettyPrint()
+        private void FillDictionary()
         {
-            for(int i = 0; i < Depth; i++)
+            if (Root != null)
+            {
+                for (int i = 0; i <= Depth; i++)
+                {
+                    Dict.Add(i, new List<Segment>());
+                }
+                Root.FillDictionary(Dict, 0);
+            }
+
+            else
+                Console.WriteLine("Tree is empty");
+        }
+
+        public void PrettyPrint()
+        {
+            FillDictionary();
+            for (int i = 0; i <= Depth; i++)
             {
                 List<Segment> l = Dict[i];
-                foreach(Segment s in l) {
+                foreach (Segment s in l)
+                {
                     string indent = new string(' ', i);
                     Console.WriteLine(indent + s);
                 }
             }
         }
+
+        public void Height()
+        {
+            Depth = Root.Height();
+        }
     }
-    
 }

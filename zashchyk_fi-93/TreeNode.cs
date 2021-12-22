@@ -1,107 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Lab123
+namespace NewLab
 {
-    public class TreeNode
+    class TreeNode
     {
-        private Segment firstSegment;
-        private Segment secondSegment;
-        private TreeNode firstSegmentReference;
-        private TreeNode secondSegmentReference;
+        public Segment segment;
+        private TreeNode leftChild;
+        private TreeNode rightChild;
 
         public TreeNode()
         {
-            firstSegment = null;
-            secondSegment = null;
-            firstSegmentReference = null;
-            secondSegmentReference = null;
+            segment = null;
+            leftChild = null;
+            rightChild = null;
         }
 
         public TreeNode(Segment data)
         {
-            firstSegment = data;
-            secondSegment = null;
-            firstSegmentReference = null;
-            secondSegmentReference = null;
+            segment = data;
+            leftChild = null;
+            rightChild = null;
         }
 
-        public TreeNode(Segment data1, Segment data2)
+        public TreeNode Insert(Segment segmentToInsert)
         {
-            firstSegment = data1;
-            secondSegment = data2;
-            firstSegmentReference = null;
-            secondSegmentReference = null;
-        }
-   
-        public void InOrderTraversal(Segment parent, Dictionary<int, List<Segment>> dict, int depth) // Обхід по порядку
-        {
-            if (firstSegment != null)
-                dict[depth].Add(firstSegment);
-
-            if(secondSegment != null)
-                dict[depth].Add(secondSegment);
-
-            depth++;
-
-            if (firstSegment != null && firstSegmentReference != null)
-            { 
-                firstSegmentReference.InOrderTraversal(firstSegment, dict, depth);
-            }
-            
-
-            if (secondSegment != null && secondSegmentReference != null)
+            TreeNode newParent = new TreeNode(segment.mutualSegment(segment, segmentToInsert));
+            if (segment.Includes(segment, segmentToInsert))
             {
-
-                secondSegmentReference.InOrderTraversal(secondSegment, dict, depth);
+                if (leftChild == null)
+                {
+                    newParent.leftChild = this;
+                    newParent.rightChild = new TreeNode(segmentToInsert);                    
+                }
+                else
+                {
+                    newParent = this;
+                    if (segmentToInsert.comapare(segmentToInsert, leftChild.segment) < segmentToInsert.comapare(segmentToInsert, rightChild.segment))
+                    {                      
+                        leftChild = leftChild.Insert(segmentToInsert);
+                    }
+                    else
+                    {                        
+                        rightChild = rightChild.Insert(segmentToInsert);
+                    }
+                }
             }
+            else
+            {
+                newParent.leftChild = this;
+                newParent.rightChild = new TreeNode(segmentToInsert);
+            }           
+            return newParent;
+        }
 
-            
+        public void FillDictionary(Dictionary<int, List<Segment>> dict, int depth)
+        {
+            dict[depth].Add(segment);
+            depth++;            
+            if (leftChild != null)
+            {                
+                leftChild.FillDictionary(dict, depth);
+            }                        
+            if (rightChild != null)
+            {
+                rightChild.FillDictionary(dict, depth);
+            }
         }
         
-
-        public int Insert(Segment data, int depth, Dictionary<int, List<Segment>> dict)
+        public int Height()
         {
-            if (firstSegment == null)
-            {
-                firstSegment = data;
-            }
-            else
-                if (firstSegment.Includes(firstSegment, data) == true)
-            {
-
-                if (firstSegmentReference == null)
-                {
-
-                    firstSegmentReference = new TreeNode(data);
-                    depth++;
-                }
-                else
-                    depth = firstSegmentReference.Insert(data, depth, dict);
-            }
-
-            else
-                if (secondSegment == null)
-            {
-                secondSegment = data;              
-            }
-            else
-                    if (secondSegment.Includes(secondSegment, data) == true)
-            {
-                if (secondSegmentReference == null)
-                {
-                    secondSegmentReference = new TreeNode(data);
-                    depth++;
-                }
-
-                else
-                depth = secondSegmentReference.Insert(data, depth, dict);
-            }
-
-            else
-                Console.WriteLine("Cannot insert " + data);
             
-            return depth;
+            if (leftChild == null && rightChild == null)
+            {
+                return 0;
+            }
+
+            int left = 0;
+            int right = 0;
+
+            
+            if (leftChild != null)
+                left = leftChild.Height();
+            if (rightChild != null)
+                right = rightChild.Height();
+
+            
+            if (left > right)
+            {
+                return left + 1;
+            }
+            else
+            {
+                return right + 1;
+            }
+
         }
     }
 }
