@@ -34,7 +34,7 @@ namespace Lab123
             secondSegmentReference = null;
         }
 
-        public void prettyPrint(int notprint)
+        /*public void prettyPrint(int notprint)
         {
             if (firstSegment != null && secondSegment == null && firstSegmentReference == null && secondSegmentReference == null)
             {
@@ -263,15 +263,14 @@ namespace Lab123
             }
 
 
-        }
-
-
-        public void InOrderTraversal(Segment parent) // Обхід по порядку
+        }*/
+        /*
+        public void prettyPrint(Segment parent) // Обхід по порядку
         {
 
             if (firstSegment != null && firstSegmentReference != null)
             {
-                firstSegmentReference.InOrderTraversal(firstSegment);
+                firstSegmentReference.prettyPrint(firstSegment);
             }
             Console.WriteLine(firstSegment);
 
@@ -283,17 +282,42 @@ namespace Lab123
                 {
                     Console.WriteLine(parent);
                 }
-                secondSegmentReference.InOrderTraversal(secondSegment);
+                secondSegmentReference.prettyPrint(secondSegment);
             }
 
             if (firstSegmentReference == null && secondSegmentReference == null)
             {
                 Console.WriteLine(secondSegment);
             }
+        }*/
+        //dict[depth].Add(data);        
+        public void InOrderTraversal(Segment parent, Dictionary<int, List<Segment>> dict, int depth) // Обхід по порядку
+        {
+            if (firstSegment != null)
+                dict[depth].Add(firstSegment);
+
+            if(secondSegment != null)
+                dict[depth].Add(secondSegment);
+
+            depth++;
+
+            if (firstSegment != null && firstSegmentReference != null)
+            { 
+                firstSegmentReference.InOrderTraversal(firstSegment, dict, depth);
+            }
+            
+
+            if (secondSegment != null && secondSegmentReference != null)
+            {
+
+                secondSegmentReference.InOrderTraversal(secondSegment, dict, depth);
+            }
+
+            
         }
         
 
-        public void Insert(Segment data)
+        public int Insert(Segment data, int depth, Dictionary<int, List<Segment>> dict)
         {
             if (firstSegment == null)
             {
@@ -302,57 +326,39 @@ namespace Lab123
             else
                 if (firstSegment.Includes(firstSegment, data) == true)
             {
+
                 if (firstSegmentReference == null)
                 {
+
                     firstSegmentReference = new TreeNode(data);
+                    depth++;
                 }
                 else
-                    firstSegmentReference.Insert(data);
+                    depth = firstSegmentReference.Insert(data, depth, dict);
             }
 
             else
                 if (secondSegment == null)
             {
-                secondSegment = data;
+                secondSegment = data;              
             }
-
             else
-                if (secondSegment.Includes(secondSegment, data) == true)
+                    if (secondSegment.Includes(secondSegment, data) == true)
             {
                 if (secondSegmentReference == null)
                 {
                     secondSegmentReference = new TreeNode(data);
+                    depth++;
                 }
+
                 else
-                    secondSegmentReference.Insert(data);
-            }
-            else
-                if (data.Includes(firstSegment, data) == false && data.Includes(secondSegment, data) == false)
-            {
-                firstSegmentReference = new TreeNode(firstSegment, secondSegment);
-                firstSegment = data;
-                secondSegment = null;
+                depth = secondSegmentReference.Insert(data, depth, dict);
             }
 
             else
-                if (data.Includes(firstSegment, data) == false)
-            {
-                firstSegmentReference = new TreeNode();
-                Segment temp = firstSegment;
-                firstSegment = data;
-                firstSegmentReference.Insert(temp);
-            }
-
-            else
-            {
-                if (data.Includes(secondSegment, data) == false)
-                {
-                    secondSegmentReference = new TreeNode();
-                    Segment temp = firstSegment;
-                    secondSegment = data;
-                    secondSegmentReference.Insert(temp);
-                }
-            }
+                Console.WriteLine("Cannot insert " + data);
+            
+            return depth;
         }
     }
 }

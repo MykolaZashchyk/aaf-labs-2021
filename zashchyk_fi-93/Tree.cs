@@ -10,29 +10,21 @@ namespace Lab123
     {
         private TreeNode Root;
 
-        public Tree(TreeNode root) //Конструктор для Tree
+        private Dictionary<int, List<Segment>> Dict;
+
+        public int Depth { get; set; }
+
+        public Tree(TreeNode root)
         {
             Root = root;
+            Dict = new Dictionary<int, List<Segment>>();
+            Depth = 0;
         }
-        public Tree() //Конструктор для Tree
+        public Tree()
         {
             Root = null;
-        }
-
-        /* public Segment Find(TreeNode root, Segment data)
-         {
-             return root.Find(data);
-         }
-        */
-        
-        public void prettyPrint()
-        {
-            if (Root != null)
-            {
-                Root.prettyPrint(0);
-            }
-            else
-                Console.WriteLine("Empty");
+            Dict = new Dictionary<int, List<Segment>>();
+            Depth = 0;
         }
         
         
@@ -40,7 +32,11 @@ namespace Lab123
         {
             if (Root != null)
             {
-                Root.InOrderTraversal(null);
+                for (int i = 0; i < Depth; i++)
+                {
+                    Dict.Add(i, new List<Segment>());
+                }
+                Root.InOrderTraversal(null, Dict, 0);
             }
             else
                 Console.WriteLine("Empty");
@@ -50,12 +46,23 @@ namespace Lab123
         {
             if (Root != null)
             {
-                Root.Insert(data);
+                Depth = Root.Insert(data, Depth, Dict);                
             }
             else 
                 Root = new TreeNode(data);
         }
-        
+
+        public void prettyPrint()
+        {
+            for(int i = 0; i < Depth; i++)
+            {
+                List<Segment> l = Dict[i];
+                foreach(Segment s in l) {
+                    string indent = new string(' ', i);
+                    Console.WriteLine(indent + s);
+                }
+            }
+        }
     }
     
 }

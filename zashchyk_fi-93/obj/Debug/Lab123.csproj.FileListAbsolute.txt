@@ -5,3 +5,10 @@ D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\Lab123\Lab123\
 D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\Lab123\Lab123\bin\Debug\Lab123.pdb
 D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\Lab123\Lab123\obj\Debug\Lab123.exe
 D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\Lab123\Lab123\obj\Debug\Lab123.pdb
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\obj\Debug\Lab123.csprojAssemblyReference.cache
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\obj\Debug\Lab123.csproj.CoreCompileInputs.cache
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\obj\Debug\Lab123.exe
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\obj\Debug\Lab123.pdb
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\bin\Debug\Lab123.exe.config
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\bin\Debug\Lab123.exe
+D:\KPI docs\3 курс\Аналіз алгоритмів\Лаба\aaf-labs-2021\zashchyk_fi-93\bin\Debug\Lab123.pdb

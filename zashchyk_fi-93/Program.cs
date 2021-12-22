@@ -1,35 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using System.Text.RegularExpressions;
 
 namespace Lab123
 {
     class Program
     {
-        public void parseCommand(string command)
+        /*static string parseCommand(string query)
         {
-            command.Replace(" ", "");
-            command.Replace(Environment.NewLine, "");
+            query = query.Replace(" ", "");
+            query.Replace(Environment.NewLine, "");
+            return query;
+        }
+        */
+        static List<Segment> searchInsert(string query)
+        {
+            string tempQuery = query;
+            string newQuery = "";
+
+            if (Regex.IsMatch(tempQuery, "\\b[(.*?)\\b]") == true)
+            {
+                newQuery = Regex.Replace("", "\\b[(.*?)\\b]");
+            }
+                
+            
         }
 
         static void Main(string[] args)
         {
-            string command;
-            while (command != "EXIT")
+            
+            string query = "";
+            while (query != "EXIT")
             {
-                command.enterCommand(Console.ReadLine());
 
-                Console.WriteLine(command + "\n");
-                
+                query = Console.ReadLine();
+                Tree newTree = null;
+                if (query == "CREATE")
+                {
 
-                //command.Parser();
+                    newTree = new Tree();
+                }
+                /*insert [2,4] [5,8];*/
+                if (searchInsert(query) == true)
+                {
+                    if (newTree == null)
+                    {
+
+                    }
+                    else
+                    {
+                        foreach (Segment s in l)
+                        {
+                            newTree.Insert(s);
+                        }
+                    }
+                       
+
+
+                       //newTree.Insert(new Segment(3, 11));
+                }
+
+                if (query == "PRINT")
+                {
+                    newTree.prettyPrint();
+                }
+
             }
-
+            
 
             /*
-            Tree newTree = new Tree(new TreeNode(new Segment(3, 11)));
+            Tree newTree = new Tree(new TreeNode());
+            newTree.Insert(new Segment(3, 11));
             newTree.Insert(new Segment(2, 10));
             newTree.Insert(new Segment(3, 4));
             newTree.Insert(new Segment(2, 10));
@@ -39,13 +81,15 @@ namespace Lab123
             newTree.Insert(new Segment(5, 10));
             newTree.Insert(new Segment(5, 8));
             newTree.Insert(new Segment(5, 10));
+            
 
+            newTree.InOrderTraversal();
             newTree.prettyPrint();
-
+            */
 
             Console.ReadLine();
 
-            */
+            
         }
     }
 }
