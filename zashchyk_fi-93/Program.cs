@@ -13,23 +13,20 @@ namespace Lab123
             query.Replace(Environment.NewLine, "");
             return query;
         }
-        */
+        *//*
         static List<Segment> searchInsert(string query)
         {
             string tempQuery = query;
-            string newQuery = "";
-
-            if (Regex.IsMatch(tempQuery, "\\b[(.*?)\\b]") == true)
-            {
-                newQuery = Regex.Replace("", "\\b[(.*?)\\b]");
-            }
-                
             
-        }
+            for (int i = 0; i < query.Length; i++)
+            {
+                if ((query[i] == 'i' || query[i] == 'i') && 
+            }
+        }*/
 
         static void Main(string[] args)
         {
-            
+            /*
             string query = "";
             while (query != "EXIT")
             {
@@ -41,7 +38,7 @@ namespace Lab123
 
                     newTree = new Tree();
                 }
-                /*insert [2,4] [5,8];*/
+                /*insert [2,4] [5,8];
                 if (searchInsert(query) == true)
                 {
                     if (newTree == null)
@@ -66,12 +63,11 @@ namespace Lab123
                     newTree.prettyPrint();
                 }
 
-            }
+            }*/
             
-
-            /*
+        
+            
             Tree newTree = new Tree(new TreeNode());
-            newTree.Insert(new Segment(3, 11));
             newTree.Insert(new Segment(2, 10));
             newTree.Insert(new Segment(3, 4));
             newTree.Insert(new Segment(2, 10));
@@ -85,7 +81,7 @@ namespace Lab123
 
             newTree.InOrderTraversal();
             newTree.prettyPrint();
-            */
+            
 
             Console.ReadLine();
 
